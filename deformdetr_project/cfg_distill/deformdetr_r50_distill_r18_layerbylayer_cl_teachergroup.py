@@ -11,7 +11,7 @@ gamma_fgd=0.0005
 lambda_fgd=0.000005
 distiller = dict(
     type='Distiller',
-    teacher_pretrained = 'work_dirs/deformdetr_r101_2x_distill_test/teacher_epoch_50.pth',
+    teacher_pretrained = '/deform_r50_epoch_50.pth',
     init_student = False,
     is_layer_by_layer_distill=True,
     use_teacher_group=True,
@@ -79,8 +79,8 @@ distiller = dict(
                    ]
     )
 
-student_cfg = 'cfg_distill/deformable_detr/deformable_detr_r50_16x2_50e_coco_student.py'
-teacher_cfg = 'cfg_distill/deformable_detr/deformable_detr_r101_16x2_50e_coco_teacher.py'
+student_cfg = 'cfg_distill/deformable_detr/deformable_detr_r18_16x2_25e_coco_student.py'
+teacher_cfg = 'cfg_distill/deformable_detr/deformable_detr_r50_16x2_50e_coco_student.py'
 optimizer = dict(
     _delete_=True,
     type='AdamW',
@@ -165,8 +165,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=2,
-    workers_per_gpu=2,
+    samples_per_gpu=1,
+    workers_per_gpu=0,
     train=dict(filter_empty_gt=False, pipeline=train_pipeline),
     val=dict(pipeline=test_pipeline),
     test=dict(pipeline=test_pipeline))
